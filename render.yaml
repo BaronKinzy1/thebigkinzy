@@ -1,1 +1,35 @@
-`This is a test`
+services:
+  - type: web
+    name: cookmybots-whatsapp-bot
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      # AI Settings
+      - key: AI_DEBUG
+        value: false
+      - key: AI_MAX_RETRIES
+        value: 3
+      - key: AI_MODEL
+        value: gpt-4o
+      - key: AI_TIMEOUT_MS
+        value: 30000
+
+      # WhatsApp Transport (Meta / Twilio / Whapi)
+      - key: CMB_WHATSAPP_TRANSPORT_ENDPOINT
+        sync: false   # Set this manually in Render dashboard
+      - key: CMB_WHATSAPP_TRANSPORT_KEY
+        sync: false   # Set this manually in Render dashboard
+
+      # Bot Behaviour
+      - key: CONCURRENCY
+        value: 5
+      - key: MARKET_FETCH_TIMEOUT_MS
+        value: 10000
+      - key: NATURAL_CHAT_GROUP_REQUIRE_MENTION
+        value: true
+      - key: NATURAL_CHAT_MODE
+        value: true
+      - key: WEB3_CHAT_MODE
+        value: false
